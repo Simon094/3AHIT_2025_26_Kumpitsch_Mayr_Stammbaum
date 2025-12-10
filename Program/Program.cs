@@ -17,10 +17,10 @@ class Program
         Console.WriteLine("Was möchten sie tun?");
         HauptMenu();
     }
-
+    static FamilyTree Hinteregger = MakeCurrentHintereggerFamilyTree();
     static void HauptMenu() //Mayr
     {
-        FamilyTree Hinteregger = MakeCurrentHintereggerFamilyTree();
+        
         Console.WriteLine("-------------------------------------------------");
         Console.WriteLine("Drücke '1' um den Stammbaum zu sehen");
         Console.WriteLine("Drücke '2' um den Stammbaum zu bearbeiten");
@@ -87,6 +87,8 @@ class Program
         {
             Console.WriteLine(p.ToString());
         }
+
+        HauptMenu();
     }
 
     static int CheckWrongChoiceInputForMainMenu(int choice) //Enter Taste tötet alles, Mayr
