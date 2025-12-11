@@ -61,6 +61,7 @@ class Program
     Person denise_hinteregger = new Person("Denise Hinteregger", 1990, true, null, false, null, null, 8);
     Person markus_hinteregger = new Person("Markus Hinteregger", 2010, false, null, true, günther_hinteregger, denise_hinteregger, 9);
     Person lisa_hinteregger = new Person("Lisa Hinteregger", 2012, false, null, false, günther_hinteregger, denise_hinteregger, 10);
+    Person missgeburt =  new Person("Simon Kumpitsch", 2008, true, null, false, günther_hinteregger, lisa_hinteregger, 99);
     FamilyTree Hinteregger = new FamilyTree("Hinteregger");
     Hinteregger.AddPerson(johann_hinteregger);
     Hinteregger.AddPerson(anna_hinteregger);
@@ -72,6 +73,7 @@ class Program
     Hinteregger.AddPerson(denise_hinteregger);
     Hinteregger.AddPerson(lisa_hinteregger);
     Hinteregger.AddPerson(markus_hinteregger);
+    Hinteregger.AddPerson(missgeburt);
     return Hinteregger;
   }
     
