@@ -7,8 +7,6 @@ CREATE TABLE IF NOT EXISTS Person (
     IsMale INTEGER NOT NULL,
     FatherId INTEGER NULL,
     MotherId INTEGER NULL,
-    FOREIGN KEY (FatherId) REFERENCES Person(Id),
-    FOREIGN KEY (MotherId) REFERENCES Person(Id)
 );
 
 CREATE TABLE IF NOT EXISTS FamilyTree (

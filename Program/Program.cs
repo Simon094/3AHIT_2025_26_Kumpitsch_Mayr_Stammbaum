@@ -93,6 +93,7 @@ class Program
 
     static int CheckWrongChoiceInputForMainMenu(int choice) //Enter Taste tötet alles, Mayr
     {
+        
         if(DatabaseExists() == false) {
         if(choice < 1 || choice > 5)
         {
@@ -123,9 +124,61 @@ class Program
 
     static void EditFamilyTree() //Mayr
     {
-        
+        Console.WriteLine("---------------------------");
+        Console.WriteLine("Was willst du ändern?");
+        Console.WriteLine("---------------------------");
+        Console.WriteLine("Drücke '1' um eine Person zu löschen");
+        Console.WriteLine("Drücke '2' um eine Person hinzuzufügen");
+        Console.WriteLine("Drücke '3' um zum Hauptmenu zurückzukehren");
+        Console.WriteLine("Drücke '4' um das Program zu beenden");
+        int choice = Convert.ToInt32(Console.ReadLine());
+        int choice2 = CheckWrongChoiceInputForMainMenu(choice);
+
+        if(choice2 == 1)
+        {
+            DeletePersonFromFamilyTree();
+        } else if (choice2 == 2)
+
+        {
+            
+        } else if (choice2 == 3)
+        {
+            
+        } else if (choice2 == 4)
+        {
+            
+        }
     }
 
+
+    static void DeletePersonFromFamilyTree()
+    {
+        Console.WriteLine("--------------------------");
+        Console.WriteLine("Geben Sie den Namen der Person ein die sie löschen wollen:");
+        Console.WriteLine("Um das löschen abzubrechen gebe 'nein' ein");
+        string deletedPerson = Convert.ToString(Console.ReadLine());
+        if(string.IsNullOrWhiteSpace(deletedPerson))
+        {
+            Console.WriteLine("Name kann nicht leer sein");
+        } else if (deletedPerson == "nein")
+        {
+            HauptMenu();
+        }
+
+        foreach(Person p in Hinteregger.Personen)
+        {
+            if(p.getName() == deletedPerson)
+            {
+                Hinteregger.RemovePerson(p);
+                Console.WriteLine($"{p.getName()} wurde aus dem Stammbaum gelöscht!");
+                Console.WriteLine($"-----------------------------------");
+                HauptMenu();
+            }
+        }
+
+        Console.WriteLine($"{deletedPerson} wurde nicht gefunden");
+        EditFamilyTree();
+    }
     static void PrintFamilyTreeAsPdf() //Mayr
     {
         
