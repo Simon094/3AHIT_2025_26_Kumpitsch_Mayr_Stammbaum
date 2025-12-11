@@ -146,7 +146,7 @@ public class Person
 
     public int Age()
   {
-    if(_deathyear != null)
+    if(_deathyear == null)
     {
       return Convert.ToInt32(DateTime.Today.Year) - _birthyear;
     } else
