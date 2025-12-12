@@ -262,6 +262,11 @@ public static class DataBaseInserter //Kumpitsch
     }
 }
 
+public static class AddAlreadyExistingInformation
+{
+    
+}
+
 
    
 
