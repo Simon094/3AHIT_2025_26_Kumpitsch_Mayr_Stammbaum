@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FamilytreesLib")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+575a8fb5ae89a008810e9acfe9d55a9401321334")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e62045e2ee63c533873038329fbb9998391478e4")]
 [assembly: System.Reflection.AssemblyProductAttribute("FamilytreesLib")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FamilytreesLib")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

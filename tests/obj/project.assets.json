@@ -94,7 +94,7 @@
     {
       "code": "NU1008",
       "level": "Error",
-      "message": "Projects that use central package version management should not define the version on the PackageReference items but on the PackageVersion items: Microsoft.NET.Test.Sdk;MSTest."
+      "message": "Projekte, die die zentrale Paketversionsverwaltung verwenden, dürfen nicht die Version für die PackageReference-Elemente, sondern für die PackageVersion-Elemente definieren: Microsoft.NET.Test.Sdk;MSTest."
     }
   ]
 }
