@@ -410,6 +410,8 @@
           }
         },
         "centralPackageVersions": {
+          "Microsoft.AspNetCore.Components.WebAssembly": "9.0.0",
+          "Microsoft.AspNetCore.Components.WebAssembly.DevServer": "9.0.0",
           "Microsoft.Data.Sqlite": "10.0.0"
         },
         "imports": [

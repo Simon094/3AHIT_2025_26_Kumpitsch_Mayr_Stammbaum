@@ -56,6 +56,8 @@
             }
           },
           "centralPackageVersions": {
+            "Microsoft.AspNetCore.Components.WebAssembly": "9.0.0",
+            "Microsoft.AspNetCore.Components.WebAssembly.DevServer": "9.0.0",
             "Microsoft.Data.Sqlite": "10.0.0"
           },
           "imports": [
@@ -119,6 +121,8 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "centralPackageVersions": {
+            "Microsoft.AspNetCore.Components.WebAssembly": "9.0.0",
+            "Microsoft.AspNetCore.Components.WebAssembly.DevServer": "9.0.0",
             "Microsoft.Data.Sqlite": "10.0.0"
           },
           "imports": [
