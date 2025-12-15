@@ -4,9 +4,7 @@ CREATE TABLE IF NOT EXISTS Person (
     Birthyear TEXT NOT NULL,
     Deathyear TEXT NULL,
     IsMarried INTEGER NOT NULL,
-    IsMale INTEGER NOT NULL,
-    FatherId INTEGER NULL,
-    MotherId INTEGER NULL,
+    IsMale INTEGER NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS FamilyTree (

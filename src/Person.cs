@@ -33,38 +33,14 @@ public class Person
     /// "_job" is for saving the job
     /// </summary>
     private bool _isMale;
-    private List<Person> _children = new List<Person>();
-    private Person? _father;
-    private Person? _mother;
     private int _personID;
-    private int? _fatherID;
-    private int? _motherID;
-    private int _generation;
-
     public int PersonID
   {
     get => _personID;
     set => _personID = value;
   }
 
-  public int? FatherID
-  {
-    get => _fatherID;
-    set => _fatherID = value;
-  }
-
-  public int? MotherID
-  {
-    get => _motherID;
-    set => _motherID = value;
-  }
-
-    public int Generation
-  {
-    get => _generation;
-    set => _generation = value;
-  }
-    public Person(string name, int birthyear, bool married, int? deathyear,bool isMale, Person? father, Person? mother, int personID)
+    public Person(string name, int birthyear, bool married, int? deathyear, bool isMale, int personID)
     {
         _name = name;
         _birthyear = birthyear;
@@ -72,8 +48,6 @@ public class Person
         DateTime today = DateTime.Today;
         _deathyear = deathyear;
         _isMale = isMale;
-        _father = father;
-        _mother = mother;
         _personID = personID;
         if (this.IsAdult() == true)
         {
@@ -84,36 +58,8 @@ public class Person
             _child = true;
         }
 
-        _generation = CalculateGeneration();
     }
 
-    /// <summary>
-    /// Function "CalculateGeneration" is for calculating which generation the person is in
-    /// </summary>
-    /// <returns></returns>
-    private int CalculateGeneration()
-{
-    // wenn keine Eltern bekannt → älteste Generation
-    if (_father == null && _mother == null)
-        return 1;
-
-    int fatherGen = _father?.Generation ?? 5;
-    int motherGen = _mother?.Generation ?? 5;
-
-    int parentGen = Math.Max(fatherGen, motherGen);
-
-    // Kind ist immer 1 Generation jünger
-    return parentGen + 1;
-}
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="child"></param>
-    public void addChild(Person child)
-    {
-        _children.Add(child);
-    }
 
     /// <summary>
     /// Adds a deathyear to the person
@@ -191,32 +137,12 @@ public class Person
         }
     }
 
-    public Person Father
-    {
-        get => _father;
-        set => _father = value;
-    }
-
-    public Person Mother
-    {
-        get => _mother;
-        set => _mother = value;
-    }
 
     public int getPersonID()
     {
         return _personID;
     }
 
-    public int? getFatherID
-    {
-        get => _fatherID;
-    }
-
-    public int? getMotherID
-    {
-        get => _motherID;
-    }
 
     public override string  ToString()
     {
