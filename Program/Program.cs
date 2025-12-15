@@ -66,8 +66,8 @@ class Program
         Person anna_hinteregger = new Person("Anna Hinteregger", 1885, true, 1958, false, 2);
         Person franz_hinteregger = new Person("Franz Hinteregger", 1912, true, 1983, true, 3);
         Person maria_hinteregger = new Person("Maria Hinteregger", 1916, true, 1990, false, 4);
+         Person josef_hinteregger = new Person("Josef Hinteregger", 1943, true, 2005, true, 5);
         Person helene_hinteregger = new Person("Helene Hinteregger", 1947, true, null, false, 6);
-        Person josef_hinteregger = new Person("Josef Hinteregger", 1943, true, 2005, true, 5);
         Person günther_hinteregger = new Person("Günther Hinteregger", 1970, true, null, true, 7);
         Person denise_hinteregger = new Person("Denise Hinteregger", 1990, true, null, false, 8);
         Person markus_hinteregger = new Person("Markus Hinteregger", 2010, false, null, true, 9);
