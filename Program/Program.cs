@@ -32,7 +32,7 @@ class Program
             Console.WriteLine("Drücke '5' um den Stammbaum zu erstellen (falls noch nicht vorhanden)");
         }
         int choicefirst = Convert.ToInt32(Console.ReadLine());
-        if(choicefirst == 8160)
+        if (choicefirst == 8160)
         {
             DatabaseCreator.CreateDatabase();
             EndProgram();
@@ -155,9 +155,8 @@ class Program
             DeletePersonFromFamilyTree();
         }
         else if (choice2 == 2)
-
         {
-
+            MakeNewPerson();
         }
         else if (choice2 == 3)
         {
@@ -169,10 +168,60 @@ class Program
         }
     }
 
+    static void MakeNewPerson()
+    {
+        Console.WriteLine("--------------------------");
+        Console.WriteLine("Geben Sie den Namen der Person ein die sie erstellen wollen (Vorname + Nachname):");
+        string name = Convert.ToString(Console.ReadLine());
+        
+        for (int i = 0; i < 10; i++)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                Console.WriteLine("Name kann nicht leer sein");
+                i--;
+            }
+            else
+            {
+                break;
+            }
+        }
+        
+        Console.WriteLine($"Geben Sie bitte das Geburtsjahr von {name} ein:");
+        int ?birthyear = Convert.ToInt32(Console.ReadLine());
+        for (int i = 0; i < 10; i++)
+        {
+            if ( birthyear == null)
+            {
+                Console.WriteLine("Geburtsjahr kann nicht leer sein");
+                i--;
+            }
+            else
+            {
+                break;
+            }
+        }
+
+        Console.WriteLine($"Ist {name} verheiratet? (Ja oder Nein)");
+        string marriedString = Convert.ToString(Console.ReadLine());
+        for (int i = 0; i < 10; i++)
+        {
+            if (string.IsNullOrWhiteSpace(marriedString))
+            {
+                Console.WriteLine("Ehestatus kann nicht leer sein");
+                marriedString = Convert.ToString(Console.ReadLine());
+                i--;
+            }
+            else
+            {
+                break;
+            }
+        }
+    }
 
     static void DeletePersonFromFamilyTree()
     {
-        Console.WriteLine("--------------------------");
+        Console.WriteLine("-------------            }");
         Console.WriteLine("Geben Sie den Namen der Person ein die sie löschen wollen:");
         Console.WriteLine("Um das löschen abzubrechen gebe 'nein' ein");
         string deletedPerson = Convert.ToString(Console.ReadLine());

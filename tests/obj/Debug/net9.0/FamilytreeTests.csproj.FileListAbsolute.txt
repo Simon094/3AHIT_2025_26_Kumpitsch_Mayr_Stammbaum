@@ -170,11 +170,6 @@ c:\Users\simon\Desktop\ITP2 Code\3AHIT_2025_26_Kumpitsch_Mayr_Stammbaum\tests\ob
 c:\Users\simon\Desktop\ITP2 Code\3AHIT_2025_26_Kumpitsch_Mayr_Stammbaum\tests\obj\Debug\net9.0\FamilytreeTests.pdb
 c:\Users\simon\Desktop\ITP2 Code\3AHIT_2025_26_Kumpitsch_Mayr_Stammbaum\tests\obj\Debug\net9.0\FamilytreeTests.genruntimeconfig.cache
 c:\Users\simon\Desktop\ITP2 Code\3AHIT_2025_26_Kumpitsch_Mayr_Stammbaum\tests\obj\Debug\net9.0\ref\FamilytreeTests.dll
-c:\Users\simon\Desktop\ITP2 Code\3AHIT_2025_26_Kumpitsch_Mayr_Stammbaum\tests\bin\Debug\net9.0\Microsoft.Win32.SystemEvents.dll
-c:\Users\simon\Desktop\ITP2 Code\3AHIT_2025_26_Kumpitsch_Mayr_Stammbaum\tests\bin\Debug\net9.0\System.Drawing.Common.dll
-c:\Users\simon\Desktop\ITP2 Code\3AHIT_2025_26_Kumpitsch_Mayr_Stammbaum\tests\bin\Debug\net9.0\runtimes\win\lib\netcoreapp2.0\Microsoft.Win32.SystemEvents.dll
-c:\Users\simon\Desktop\ITP2 Code\3AHIT_2025_26_Kumpitsch_Mayr_Stammbaum\tests\bin\Debug\net9.0\runtimes\unix\lib\netcoreapp2.0\System.Drawing.Common.dll
-c:\Users\simon\Desktop\ITP2 Code\3AHIT_2025_26_Kumpitsch_Mayr_Stammbaum\tests\bin\Debug\net9.0\runtimes\win\lib\netcoreapp2.0\System.Drawing.Common.dll
 c:\Code\SEW\3AHIT_2025_26_Kumpitsch_Mayr_Stammbaum\3AHIT_2025_26_Kumpitsch_Mayr_Stammbaum\tests\bin\Debug\net9.0\.msCoverageSourceRootsMapping_FamilytreeTests
 c:\Code\SEW\3AHIT_2025_26_Kumpitsch_Mayr_Stammbaum\3AHIT_2025_26_Kumpitsch_Mayr_Stammbaum\tests\bin\Debug\net9.0\testhost.exe
 c:\Code\SEW\3AHIT_2025_26_Kumpitsch_Mayr_Stammbaum\3AHIT_2025_26_Kumpitsch_Mayr_Stammbaum\tests\bin\Debug\net9.0\testhost.dll

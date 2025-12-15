@@ -356,20 +356,20 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\lukas\\.nuget\\packages\\": {}
+    "C:\\Users\\simon\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Code\\SEW\\3AHIT_2025_26_Kumpitsch_Mayr_Stammbaum\\3AHIT_2025_26_Kumpitsch_Mayr_Stammbaum\\Program\\Program.csproj",
+      "projectUniqueName": "C:\\Users\\simon\\Desktop\\ITP2 Code\\3AHIT_2025_26_Kumpitsch_Mayr_Stammbaum\\Program\\Program.csproj",
       "projectName": "Program",
-      "projectPath": "C:\\Code\\SEW\\3AHIT_2025_26_Kumpitsch_Mayr_Stammbaum\\3AHIT_2025_26_Kumpitsch_Mayr_Stammbaum\\Program\\Program.csproj",
-      "packagesPath": "C:\\Users\\lukas\\.nuget\\packages\\",
-      "outputPath": "C:\\Code\\SEW\\3AHIT_2025_26_Kumpitsch_Mayr_Stammbaum\\3AHIT_2025_26_Kumpitsch_Mayr_Stammbaum\\Program\\obj\\",
+      "projectPath": "C:\\Users\\simon\\Desktop\\ITP2 Code\\3AHIT_2025_26_Kumpitsch_Mayr_Stammbaum\\Program\\Program.csproj",
+      "packagesPath": "C:\\Users\\simon\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\simon\\Desktop\\ITP2 Code\\3AHIT_2025_26_Kumpitsch_Mayr_Stammbaum\\Program\\obj\\",
       "projectStyle": "PackageReference",
       "centralPackageVersionsManagementEnabled": true,
       "configFilePaths": [
-        "C:\\Users\\lukas\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\simon\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
@@ -381,8 +381,8 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "C:\\Code\\SEW\\3AHIT_2025_26_Kumpitsch_Mayr_Stammbaum\\3AHIT_2025_26_Kumpitsch_Mayr_Stammbaum\\src\\FamilytreesLib.csproj": {
-              "projectPath": "C:\\Code\\SEW\\3AHIT_2025_26_Kumpitsch_Mayr_Stammbaum\\3AHIT_2025_26_Kumpitsch_Mayr_Stammbaum\\src\\FamilytreesLib.csproj"
+            "C:\\Users\\simon\\Desktop\\ITP2 Code\\3AHIT_2025_26_Kumpitsch_Mayr_Stammbaum\\src\\FamilytreesLib.csproj": {
+              "projectPath": "C:\\Users\\simon\\Desktop\\ITP2 Code\\3AHIT_2025_26_Kumpitsch_Mayr_Stammbaum\\src\\FamilytreesLib.csproj"
             }
           }
         }
