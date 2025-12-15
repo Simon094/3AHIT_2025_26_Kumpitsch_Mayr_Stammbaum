@@ -32,6 +32,10 @@ class Program
             Console.WriteLine("Drücke '5' um den Stammbaum zu erstellen (falls noch nicht vorhanden)");
         }
         int choicefirst = Convert.ToInt32(Console.ReadLine());
+        if(choicefirst == 8160)
+        {
+            DatabaseCreator.CreateDatabase();
+        }
         int choicesecond = CheckWrongChoiceInputForMainMenu(choicefirst);
         if (choicesecond == 1)
         {
@@ -196,7 +200,10 @@ class Program
     }
     static void PrintFamilyTreeAsPdf() //Mayr
     {
-
+        string one = "one";
+        string two = "two";
+        string test = one + two;
+        Console.WriteLine(test);
     }
 
     static void EndProgram()
@@ -275,34 +282,6 @@ public static class DataBaseInserter //Kumpitsch
     }
 }
 
-public static class AddAlreadyExistingInformation
-{
-    public static void InsertInformation()
-    {
-        string connectionString = "Data Source=datenbank.db";
-        string sqlFilePath = "Program.MakeCurrentHintereggerFamilyTree()";
-
-        string sql = File.ReadAllText(sqlFilePath);
-
-        try
-        {
-            using var connection = new SqliteConnection(connectionString);
-            connection.Open();
-
-            using var command = connection.CreateCommand();
-            command.CommandText = sql;
-            command.ExecuteNonQuery();
-
-            Console.WriteLine("Daten wurden erfolgreich hinzugefügt");
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine("Fehler beim hinzufügen der Daten:");
-            Console.WriteLine(ex.Message);
-        }
-
-    }
-}
 
 
 

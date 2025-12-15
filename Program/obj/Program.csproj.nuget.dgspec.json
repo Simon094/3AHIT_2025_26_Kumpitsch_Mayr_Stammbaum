@@ -58,7 +58,10 @@
           "centralPackageVersions": {
             "Microsoft.AspNetCore.Components.WebAssembly": "9.0.0",
             "Microsoft.AspNetCore.Components.WebAssembly.DevServer": "9.0.0",
-            "Microsoft.Data.Sqlite": "10.0.0"
+            "Microsoft.Data.Sqlite": "10.0.0",
+            "Microsoft.NET.Test.Sdk": "17.11.1",
+            "MSTest.TestAdapter": "3.5.2",
+            "MSTest.TestFramework": "3.5.2"
           },
           "imports": [
             "net461",
@@ -123,7 +126,10 @@
           "centralPackageVersions": {
             "Microsoft.AspNetCore.Components.WebAssembly": "9.0.0",
             "Microsoft.AspNetCore.Components.WebAssembly.DevServer": "9.0.0",
-            "Microsoft.Data.Sqlite": "10.0.0"
+            "Microsoft.Data.Sqlite": "10.0.0",
+            "Microsoft.NET.Test.Sdk": "17.11.1",
+            "MSTest.TestAdapter": "3.5.2",
+            "MSTest.TestFramework": "3.5.2"
           },
           "imports": [
             "net461",
