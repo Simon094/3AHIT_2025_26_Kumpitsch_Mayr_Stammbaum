@@ -35,6 +35,7 @@ class Program
         if(choicefirst == 8160)
         {
             DatabaseCreator.CreateDatabase();
+            EndProgram();
         }
         int choicesecond = CheckWrongChoiceInputForMainMenu(choicefirst);
         if (choicesecond == 1)
@@ -281,9 +282,3 @@ public static class DataBaseInserter //Kumpitsch
 
     }
 }
-
-
-
-
-
-
