@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FamilytreeTests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e62045e2ee63c533873038329fbb9998391478e4")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3a30ecde5aabfe3844591ebef235a8c84ec3dfcf")]
 [assembly: System.Reflection.AssemblyProductAttribute("FamilytreeTests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FamilytreeTests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
