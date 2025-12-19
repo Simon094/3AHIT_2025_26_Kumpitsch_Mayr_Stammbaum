@@ -7,7 +7,11 @@ VALUES
 (4, 'Maria Hinteregger', 1916, 1990, True, False);
 (5, 'Josef Hinteregger', 1943, 2005, True, True);
 (6, 'Helene Hinteregger', 1947, NULL, True, False);
-(7, 'Günther Hinteregger', 1970)
+(7, 'Günther Hinteregger', 1970, NULL, True, True);
+(8, 'Denise Hinteregger', 1990, NULL, True, False);
+(9, 'Markus Hinteregger', 2010, NULL, False, True);
+(10, 'Lisa Hinteregger', 2012, NULL, False, False);
+
 
 
 

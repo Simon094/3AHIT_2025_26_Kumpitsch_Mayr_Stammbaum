@@ -16,7 +16,7 @@ public class Person
     /// <summary>
     /// "_birthyear" is for saving the birthyear as an int
     /// </summary>
-    private int _birthyear;
+    private int? _birthyear;
     /// <summary>
     /// "_deathdate" is for saving the deathdate as DateTime
     /// </summary>
@@ -34,13 +34,13 @@ public class Person
     /// </summary>
     private bool _isMale;
     private int _personID;
+
     public int PersonID
   {
     get => _personID;
     set => _personID = value;
   }
-
-    public Person(string name, int birthyear, bool married, int? deathyear, bool isMale, int personID)
+    public Person(string name, int ?birthyear, bool married, int? deathyear,bool isMale, int personID)
     {
         _name = name;
         _birthyear = birthyear;
@@ -57,9 +57,7 @@ public class Person
         {
             _child = true;
         }
-
     }
-
 
     /// <summary>
     /// Adds a deathyear to the person
@@ -94,10 +92,10 @@ public class Person
   {
     if(_deathyear == null)
     {
-      return Convert.ToInt32(DateTime.Today.Year) - _birthyear;
+      return Convert.ToInt32(DateTime.Today.Year) - Convert.ToInt32(_birthyear);
     } else
     {
-      return Convert.ToInt32(_deathyear) - _birthyear;
+      return Convert.ToInt32(_deathyear) - Convert.ToInt32(_birthyear);
     }
   }
 
@@ -106,7 +104,7 @@ public class Person
         return _name;
     }
 
-    public int Birthyear
+    public int? Birthyear
     {
         get => _birthyear;
         set => _birthyear = value;
@@ -137,12 +135,10 @@ public class Person
         }
     }
 
-
     public int getPersonID()
     {
         return _personID;
     }
-
 
     public override string  ToString()
     {

@@ -32,7 +32,7 @@ public class FamilyTree
     /// </summary>
     public List<Person> Personen
     {
-    get => _personen.OrderBy(p => p.Generation).ToList();
+    get => _personen.OrderBy(p => p.Age()).ToList();
     }
     /// <summary>
     /// function "getName" is for giving out the name of a familytree as string
@@ -67,6 +67,22 @@ public class FamilyTree
         Console.WriteLine(p.ToString());
     }
    } 
+
+    /// <summary>
+    /// Function "MakeNewId" is for the program to make a new id of + 1 to the person that is goint to be added
+    /// </summary>
+    /// <returns></returns> return the new id that a newly created person is going to get
+   public int MakeNewId()
+    {
+        List<int> ids = new List<int>();
+        foreach(Person i in _personen)
+        {
+          ids.Add(i.PersonID); 
+        }
+
+        int newId = ids.Last() + 1;
+        return newId;
+    }
    }
             
         
