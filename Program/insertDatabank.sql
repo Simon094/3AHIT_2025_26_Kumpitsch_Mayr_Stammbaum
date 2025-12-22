@@ -12,5 +12,3 @@ VALUES
 ('Markus Hinteregger', 2010, NULL, 0, 1),
 ('Lisa Hinteregger', 2012, NULL, 0, 0);
 
-DELETE FROM Person;
-DROP TABLE IF EXISTS "FamilyTree";
