@@ -21,7 +21,7 @@ class Program
     static FamilyTree Hinteregger = MakeCurrentHintereggerFamilyTree();
     static void HauptMenu() //Mayr
     {
-
+        RunDatabase();
         Console.WriteLine("-------------------------------------------------");
         Console.WriteLine("Drücke '1' um den Stammbaum zu sehen");
         Console.WriteLine("Drücke '2' um den Stammbaum zu bearbeiten");
@@ -454,7 +454,7 @@ class Program
         return File.Exists("datenbank.db");
     }
 
-    static void RunDatabase() // Ins Programm einbauen Herr Mayr
+    static void RunDatabase() 
     {
         DatabaseCreator.CreateDatabase();
         DataBaseInserter.InsertToDatabase();
@@ -471,7 +471,6 @@ public static class DatabaseCreator //Kumpitsch
 
         if (!File.Exists(sqlFilePath))
         {
-            Console.WriteLine($"Vaterl Error: {sqlFilePath}");
             return;
         }
 
@@ -486,12 +485,10 @@ public static class DatabaseCreator //Kumpitsch
             command.CommandText = sql;
             command.ExecuteNonQuery();
 
-            Console.WriteLine("Datenbank erfolgreich erstellt!");
         }
         catch (Exception ex)
         {
-            Console.WriteLine("Fehler beim Erstellen der Datenbank:");
-            Console.WriteLine(ex.Message);
+
         }
     }
 }
@@ -514,11 +511,9 @@ public static class DataBaseInserter //Kumpitsch
             command.CommandText = sql;
             command.ExecuteNonQuery();
 
-            Console.WriteLine("Daten wurden erfolgreich hinzugefügt");
         }
         catch (Exception ex)
         {
-            Console.WriteLine("Fehler beim hinzufügen der Daten:");
             Console.WriteLine(ex.Message);
         }
 
