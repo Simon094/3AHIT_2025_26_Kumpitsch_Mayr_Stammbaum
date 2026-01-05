@@ -1,8 +1,9 @@
 CREATE TABLE IF NOT EXISTS Person (
     Id INTEGER PRIMARY KEY AUTOINCREMENT,
     Name TEXT NOT NULL,
-    Birthyear TEXT NOT NULL,
+    Birthyear TEXT NULL,
     Deathyear TEXT NULL,
     IsMarried INTEGER NOT NULL,
-    IsMale INTEGER NOT NULL
+    IsMale INTEGER NOT NULL,
+    UNIQUE (Name, IsMarried, IsMale)
 );

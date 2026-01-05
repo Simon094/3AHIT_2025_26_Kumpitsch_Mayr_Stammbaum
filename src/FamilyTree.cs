@@ -7,7 +7,7 @@ using Microsoft.VisualBasic;
 using Microsoft.Win32;
 using System.Linq;
 
-public class FamilyTree
+public class FamilyTree // 50/50 von beiden gemacht und kommentiert
 {
     /// <summary>
     /// "_person" is for saving a list of the persons on the familytree

@@ -1,4 +1,4 @@
-INSERT INTO Person
+INSERT OR IGNORE INTO Person
 (Name, Birthyear, Deathyear, IsMarried, IsMale)
 VALUES
 ('Johann Hinteregger', 1880, 1951, 1, 1),

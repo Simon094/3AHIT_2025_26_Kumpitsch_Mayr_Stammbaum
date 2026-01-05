@@ -3,14 +3,20 @@ using FamilytreesLib;
 namespace FamilyTreeApp;
 
 using Microsoft.Data.Sqlite;
-class Program
+using QuestPDF.Fluent;
+using QuestPDF.Helpers;
+using QuestPDF.Infrastructure;
+class Program //Fast alle made by Mayr
 {
-    static void Main(string[] args) //Mayr
+    static string connectionString = "Data Source=datenbank.db";
+    static void Main(string[] args) //fast alles made by Mayr
     {
-        StartProgram(); //Mayr
+        QuestPDF.Settings.License = LicenseType.Community;
+        RunDatabase(); //Kumpitsch
+        StartProgram();
     }
 
-    static void StartProgram() //Mayr
+    static void StartProgram() //made by Mayr
     {
         Console.WriteLine("Willkommen bei der Stammbaum-Software Familie Hinteregger");
         Console.WriteLine("-------------------------------------------------");
@@ -18,10 +24,10 @@ class Program
         Console.WriteLine("Was möchten sie tun?");
         HauptMenu();
     }
-    static FamilyTree Hinteregger = MakeCurrentHintereggerFamilyTree();
-    static void HauptMenu() //Mayr
+
+    static void HauptMenu() //made by Mayr
     {
-        RunDatabase();
+
         Console.WriteLine("-------------------------------------------------");
         Console.WriteLine("Drücke '1' um den Stammbaum zu sehen");
         Console.WriteLine("Drücke '2' um den Stammbaum zu bearbeiten");
@@ -31,7 +37,7 @@ class Program
         int choicesecond = CheckWrongChoiceInputForMainMenu(choicefirst, 4, 1);
         if (choicesecond == 1)
         {
-            DisplayFamilyTreeInfos(Hinteregger);
+            DisplayFamilyTreeInfos();
         }
         else if (choicesecond == 2)
         {
@@ -47,51 +53,39 @@ class Program
         }
     }
 
-    static FamilyTree MakeCurrentHintereggerFamilyTree()
-    {
-        Person johann_hinteregger = new Person("Johann Hinteregger", 1880, true, 1951, true, 1);
-        Person anna_hinteregger = new Person("Anna Hinteregger", 1885, true, 1958, false, 2);
-        Person franz_hinteregger = new Person("Franz Hinteregger", 1912, true, 1983, true, 3);
-        Person maria_hinteregger = new Person("Maria Hinteregger", 1916, true, 1990, false, 4);
-        Person helene_hinteregger = new Person("Helene Hinteregger", 1947, true, null, false, 6);
-        Person josef_hinteregger = new Person("Josef Hinteregger", 1943, true, 2005, true, 5);
-        Person günther_hinteregger = new Person("Günther Hinteregger", 1970, true, null, true, 7);
-        Person denise_hinteregger = new Person("Denise Hinteregger", 1990, true, null, false, 8);
-        Person markus_hinteregger = new Person("Markus Hinteregger", 2010, false, null, true, 9);
-        Person lisa_hinteregger = new Person("Lisa Hinteregger", 2012, false, null, false, 10);
-        Person missgeburt = new Person("Simon Kumpitsch", 2008, true, null, false, 99);
-        FamilyTree Hinteregger = new FamilyTree("Hinteregger");
-        Hinteregger.AddPerson(johann_hinteregger);
-        Hinteregger.AddPerson(anna_hinteregger);
-        Hinteregger.AddPerson(franz_hinteregger);
-        Hinteregger.AddPerson(maria_hinteregger);
-        Hinteregger.AddPerson(helene_hinteregger);
-        Hinteregger.AddPerson(josef_hinteregger);
-        Hinteregger.AddPerson(günther_hinteregger);
-        Hinteregger.AddPerson(denise_hinteregger);
-        Hinteregger.AddPerson(lisa_hinteregger);
-        Hinteregger.AddPerson(markus_hinteregger);
-        Hinteregger.AddPerson(missgeburt);
-        return Hinteregger;
-    }
-
-
-    static void SeeFamilyTree(FamilyTree familyTree) //Mayr
+    static void SeeFamilyTree(FamilyTree familyTree) //made by Mayr
     {
         familyTree.DisplayFamilyTreeInfos();
     }
 
-    static void DisplayFamilyTreeInfos(FamilyTree hinteregger)
+    static void DisplayFamilyTreeInfos() //made by mayr
     {
-        foreach (Person p in hinteregger.Personen)
+        var personen = LadeAllePersonenAusDb()
+            .OrderBy(p => p.Birthyear ?? int.MaxValue)
+            .ToList();
+
+        Console.WriteLine("-------------------------------------------------");
+        Console.WriteLine("Stammbaum aller Personen (alt → neu):");
+        Console.WriteLine("-------------------------------------------------");
+
+        foreach (Person p in personen)
         {
-            Console.WriteLine(p.ToString());
+            string gender = p.IsMale ? "Männlich" : "Weiblich";
+            string married = p.Married ? "Ja" : "Nein";
+            string deathYear = p.Deathyear.HasValue ? p.Deathyear.Value.ToString() : "-";
+
+            Console.WriteLine($"Name: {p.Name}");
+            Console.WriteLine($"Geburtsjahr: {p.Birthyear}");
+            Console.WriteLine($"Sterbejahr: {deathYear}");
+            Console.WriteLine($"Verheiratet: {married}");
+            Console.WriteLine($"Geschlecht: {gender}");
+            Console.WriteLine("-------------------------------------------------");
         }
 
         HauptMenu();
     }
 
-    static int CheckWrongChoiceInputForMainMenu(int choice, int maxChoice, int minChoice) //Enter Taste tötet alles, Mayr
+    static int CheckWrongChoiceInputForMainMenu(int choice, int maxChoice, int minChoice) //made by Mayr
     {
         if (choice < minChoice || choice > maxChoice)
         {
@@ -107,7 +101,7 @@ class Program
     }
 
 
-    static void EditFamilyTree() //Mayr
+    static void EditFamilyTree() //made by Mayr
     {
         Console.WriteLine("---------------------------");
         Console.WriteLine("Was willst du ändern?");
@@ -115,9 +109,8 @@ class Program
         Console.WriteLine("Drücke '1' um eine Person zu löschen");
         Console.WriteLine("Drücke '2' um eine Person hinzuzufügen");
         Console.WriteLine("Drücke '3' um zum Hauptmenu zurückzukehren");
-        Console.WriteLine("Drücke '4' um das Program zu beenden");
         int choice = Convert.ToInt32(Console.ReadLine());
-        int choice2 = CheckWrongChoiceInputForMainMenu(choice, 4, 1);
+        int choice2 = CheckWrongChoiceInputForMainMenu(choice, 3, 1);
 
         if (choice2 == 1)
         {
@@ -129,15 +122,11 @@ class Program
         }
         else if (choice2 == 3)
         {
-
-        }
-        else if (choice2 == 4)
-        {
-
+            HauptMenu();
         }
     }
 
-    static string MakeNewPersonNameMaker()
+    static string MakeNewPersonNameMaker() //made by Mayr
     {
         Console.WriteLine("Geben Sie den Namen der Person ein die sie erstellen wollen (Vorname + Nachname):");
         string name = Convert.ToString(Console.ReadLine());
@@ -164,7 +153,7 @@ class Program
         return name;
     }
 
-    static int? MakeNewPersonBirthdateMaker(string name)
+    static int? MakeNewPersonBirthdateMaker(string name) //made by Mayr
     {
         Console.WriteLine($"Geben Sie bitte das Geburtsjahr von {name} ein:");
         int? birthyear = Convert.ToInt32(Console.ReadLine());
@@ -197,7 +186,7 @@ class Program
         return birthyear;
     }
 
-    static bool MakeNewPersonMarriedMaker(string name)
+    static bool MakeNewPersonMarriedMaker(string name) //made by Mayr
     {
         bool married = false;
         Console.WriteLine($"Ist {name} verheiratet? (Ja oder Nein)");
@@ -232,7 +221,7 @@ class Program
         return married;
     }
 
-    static int? MakeNewPersonIsAliveMaker(string name, int? birthyear)
+    static int? MakeNewPersonIsAliveMaker(string name, int? birthyear) //made by Mayr
     {
         Console.WriteLine($"Ist {name} noch am Leben? (Ja oder Nein)");
         int? deathyear = null;
@@ -296,9 +285,9 @@ class Program
         return deathyear;
     }
 
-    static bool MakeNewPersonIsMaleMaker(string name)
+    static bool MakeNewPersonIsMaleMaker(string name) //made by Mayr
     {
-        Console.WriteLine($"War {name} männlich? (ja oder nein)");
+        Console.WriteLine($"Ist {name} männlich? (ja oder nein)");
         bool IsAMaleForProgram = true;
         string isMaleString = Convert.ToString(Console.ReadLine());
         while (string.IsNullOrWhiteSpace(isMaleString) || (isMaleString.ToLower() != "ja" && isMaleString.ToLower() != "nein"))
@@ -317,21 +306,30 @@ class Program
         }
         return IsAMaleForProgram;
     }
-    static void MakeNewPerson()
+    static void MakeNewPerson() //made by Mayr
     {
+
         Console.WriteLine("--------------------------");
         string name = MakeNewPersonNameMaker();
         int? birthyear = MakeNewPersonBirthdateMaker(name);
         bool married = MakeNewPersonMarriedMaker(name);
         int? deathyear = MakeNewPersonIsAliveMaker(name, birthyear);
         bool IsAMaleForProgram = MakeNewPersonIsMaleMaker(name);
-        int newId = Hinteregger.MakeNewId();
 
 
 
         Console.WriteLine("--------------------------");
         Console.WriteLine($"{name} hat folgende Daten:");
         Console.WriteLine($"Geburtsjahr: {birthyear}");
+
+        if (IsAMaleForProgram == true)
+        {
+            Console.WriteLine($"{name} ist männlich");
+        }
+        else
+        {
+            Console.WriteLine($"{name} ist weiblich");
+        }
         if (married == true)
         {
             Console.WriteLine($"{name} ist verheiratet");
@@ -344,7 +342,6 @@ class Program
         {
             Console.WriteLine($"Sterbejahr ist {deathyear}");
         }
-        Console.WriteLine($"{name} hat die Id: {newId}");
         Console.WriteLine("Sind die eingegebenen Daten korrekt?");
         string mirFälltKeinNameMehrEin = Convert.ToString(Console.ReadLine());
         while (string.IsNullOrWhiteSpace(mirFälltKeinNameMehrEin))
@@ -402,69 +399,300 @@ class Program
         }
         Console.WriteLine("--------------------------");
 
-        Person newPerson = new Person(name, birthyear, married, deathyear, IsAMaleForProgram, newId);
-        Hinteregger.AddPerson(newPerson);
+
+        using var connection = new SqliteConnection(connectionString);
+        connection.Open();
+        PersonZuDbHinzufügen(connection, name, birthyear, married, deathyear, IsAMaleForProgram);
+        connection.Dispose();
 
         HauptMenu();
     }
-    static void DeletePersonFromFamilyTree()
+
+    static void PersonZuDbHinzufügen(SqliteConnection connection, string name, int? birthyear, bool married, int? deathyear, bool IsMale) //made by Mayr
+    {
+        var cmd = connection.CreateCommand();
+        cmd.CommandText =
+        @"
+        INSERT INTO Person (Name, Birthyear, Deathyear, IsMarried, IsMale)
+        VALUES ($name, $birthyear, $deathyear, $married, $IsMale);
+        ";
+
+        cmd.Parameters.AddWithValue("$name", name);
+        cmd.Parameters.AddWithValue(
+        "$birthyear",
+        birthyear.HasValue ? birthyear.Value : DBNull.Value
+        );
+        cmd.Parameters.AddWithValue(
+        "$deathyear",
+        deathyear.HasValue ? deathyear.Value : DBNull.Value
+        );
+        cmd.Parameters.AddWithValue("$married", married);
+        cmd.Parameters.AddWithValue("$IsMale", IsMale);
+
+        cmd.ExecuteNonQuery();
+    }
+
+    static void PersonAusDbLöschenNachName(SqliteConnection connection, string name) //made by Mayr
+    {
+        var cmd = connection.CreateCommand();
+        cmd.CommandText =
+        @"
+        DELETE FROM Person
+        WHERE Name = $name;
+        ";
+
+        cmd.Parameters.AddWithValue("$name", name);
+
+        int rows = cmd.ExecuteNonQuery();
+
+        if (rows == 0)
+            Console.WriteLine("Keine Person mit diesem Namen in der Datenbank gefunden.");
+        else
+            Console.WriteLine($"{rows} Person(en) aus der Datenbank gelöscht.");
+    }
+
+    static bool PersonExistiertInDb(SqliteConnection connection, string name) //made by Mayr
+    {
+        var cmd = connection.CreateCommand();
+        cmd.CommandText =
+        @"
+    SELECT COUNT(*) 
+    FROM Person
+    WHERE Name = $name;
+    ";
+
+        cmd.Parameters.AddWithValue("$name", name);
+
+        long count = (long)cmd.ExecuteScalar();
+        return count > 0;
+    }
+
+    static void PersonAusDbLöschenNachName1(SqliteConnection connection, string name) //made by Mayr
+    {
+        var cmd = connection.CreateCommand();
+        cmd.CommandText =
+        @"
+    DELETE FROM Person
+    WHERE Name = $name;
+    ";
+
+        cmd.Parameters.AddWithValue("$name", name);
+
+        int rows = cmd.ExecuteNonQuery();
+        Console.WriteLine($"{rows} Person(en) aus der Datenbank gelöscht.");
+    }
+    static void DeletePersonFromFamilyTree() //made by Mayr
     {
         Console.WriteLine("--------------------------");
-        Console.WriteLine("Geben Sie den Namen der Person ein die sie löschen wollen:");
-        Console.WriteLine("Um das löschen abzubrechen gebe 'nein' ein");
-        string deletedPerson = Convert.ToString(Console.ReadLine());
-        if (string.IsNullOrWhiteSpace(deletedPerson))
+        Console.WriteLine("Geben Sie den Namen der Person ein die Sie löschen wollen:");
+        Console.WriteLine("Abbrechen mit 'nein'");
+
+        string name = Console.ReadLine();
+
+        if (string.IsNullOrWhiteSpace(name))
         {
-            Console.WriteLine("Name kann nicht leer sein");
+            Console.WriteLine("Name darf nicht leer sein");
+            return;
         }
-        else if (deletedPerson == "nein")
+
+        if (name.ToLower() == "nein")
         {
             HauptMenu();
+            return;
         }
 
-        foreach (Person p in Hinteregger.Personen)
+        using var connection = new SqliteConnection(connectionString);
+        connection.Open();
+
+        if (!PersonExistiertInDb(connection, name))
         {
-            if (p.getName() == deletedPerson)
-            {
-                Hinteregger.RemovePerson(p);
-                Console.WriteLine($"{p.getName()} wurde aus dem Stammbaum gelöscht!");
-                Console.WriteLine($"-----------------------------------");
-                HauptMenu();
-            }
+            Console.WriteLine("Diese Person existiert nicht in der Datenbank.");
+            return;
         }
 
-        Console.WriteLine($"{deletedPerson} wurde nicht gefunden");
-        EditFamilyTree();
+        Console.WriteLine($"Soll {name} wirklich gelöscht werden? (ja/nein)");
+        string confirm = Console.ReadLine()?.ToLower();
+
+        if (confirm == "ja")
+        {
+            PersonAusDbLöschenNachName1(connection, name);
+        }
+        else
+        {
+            Console.WriteLine("Löschen abgebrochen.");
+        }
+
+        HauptMenu();
     }
-    static void PrintFamilyTreeAsPdf() //Mayr
+    static void PrintFamilyTreeAsPdf() //made by Mayr
     {
-        string one = "one";
-        string two = "two";
-        string test = one + two;
-        Console.WriteLine(test);
+        ExportiereDbAlsPdfQuestPdf();
+        HauptMenu();
     }
 
-    static void EndProgram()
+    static List<Person> LadeAllePersonenAusDb() //made by Mayr
+    {
+        var personen = new List<Person>();
+
+        using var connection = new SqliteConnection(connectionString);
+        connection.Open();
+
+        var cmd = connection.CreateCommand();
+        cmd.CommandText = @"
+        SELECT Id, Name, Birthyear, Deathyear, IsMarried, IsMale 
+        FROM Person
+        ORDER BY Birthyear ASC;"; // ASC = aufsteigend (alt → neu)
+
+        using var reader = cmd.ExecuteReader();
+        while (reader.Read())
+        {
+            string name = reader.GetString(1);
+            int? birthyear = reader.IsDBNull(2) ? null : reader.GetInt32(2);
+            int? deathyear = reader.IsDBNull(3) ? null : reader.GetInt32(3);
+            bool married = reader.GetBoolean(4);
+            bool isMale = reader.GetBoolean(5);
+            int id = reader.GetInt32(0);
+
+            var person = new Person(name, birthyear, married, deathyear, isMale, id);
+            personen.Add(person);
+        }
+
+        return personen;
+    }
+
+    static string GeneriereHtmlFürPdf(List<Person> personen) //nicht mehr nötig wegen Umstellung auf QuestPDF - made by Mayr
+    {
+        var html = @"
+    <html>
+    <head>
+        <style>
+            body { font-family: Arial; }
+            table { width: 100%; border-collapse: collapse; }
+            th, td { border: 1px solid black; padding: 5px; text-align: left; }
+            th { background-color: #f2f2f2; }
+        </style>
+    </head>
+    <body>
+        <h1>Stammbaum aller Personen</h1>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Geburtsjahr</th>
+                <th>Sterbejahr</th>
+                <th>Verheiratet</th>
+                <th>Geschlecht</th>
+            </tr>";
+
+        foreach (var p in personen)
+        {
+            string gender = p.IsMale ? "Männlich" : "Weiblich";
+            string deathYear = p.Deathyear.HasValue ? p.Deathyear.Value.ToString() : "-";
+            string married = p.Married ? "Ja" : "Nein";
+
+            html += $@"
+            <tr>
+                <td>{p.Name}</td>
+                <td>{p.Birthyear}</td>
+                <td>{deathYear}</td>
+                <td>{married}</td>
+                <td>{gender}</td>
+            </tr>";
+        }
+
+        html += @"
+        </table>
+    </body>
+    </html>";
+
+        return html;
+    }
+
+    static void ExportiereDbAlsPdfQuestPdf() //made by Mayr mit ein bisschen aushilfe von ChatGPT
+    {
+        var personen = LadeAllePersonenAusDb();
+
+        var pdfPath = "Stammbaum_Hinteregger.pdf";
+
+        Document.Create(container =>
+        {
+            container.Page(page =>
+            {
+                page.Size(PageSizes.A4);
+                page.Margin(20);
+                page.PageColor(Colors.White);
+                page.DefaultTextStyle(x => x.FontSize(12));
+
+                page.Header()
+                    .Text("Stammbaum aller Personen")
+                    .SemiBold().FontSize(20).FontColor(Colors.Blue.Medium);
+
+                page.Content()
+                    .Table(table =>
+                    {
+                        table.ColumnsDefinition(columns =>
+                        {
+                            columns.RelativeColumn();
+                            columns.RelativeColumn();
+                            columns.RelativeColumn();
+                            columns.RelativeColumn();
+                            columns.RelativeColumn();
+                        });
+
+                        table.Header(header =>
+                        {
+                            header.Cell().Text("Name").SemiBold();
+                            header.Cell().Text("Geburtsjahr").SemiBold();
+                            header.Cell().Text("Sterbejahr").SemiBold();
+                            header.Cell().Text("Verheiratet").SemiBold();
+                            header.Cell().Text("Geschlecht").SemiBold();
+                        });
+
+                        foreach (var p in personen)
+                        {
+                            table.Cell().Text(p.Name);
+                            table.Cell().Text(p.Birthyear?.ToString() ?? "-");
+                            table.Cell().Text(p.Deathyear?.ToString() ?? "-");
+                            table.Cell().Text(p.Married ? "Ja" : "Nein");
+                            table.Cell().Text(p.IsMale ? "Männlich" : "Weiblich");
+                        }
+                    });
+
+                page.Footer()
+                    .AlignCenter()
+                    .Text(txt =>
+                    {
+                        txt.Span("Erstellt am ");
+                        txt.Span(DateTime.Now.ToString("dd.MM.yyyy"));
+                    });
+            });
+        })
+        .GeneratePdf(pdfPath);
+
+        Console.WriteLine($"PDF erfolgreich erstellt: {pdfPath}");
+    }
+
+    static void EndProgram() //made by Mayr
     {
         //does nothing
     }
 
-    static bool DatabaseExists()
+    static bool DatabaseExists() //made by Kumpitsch
     {
         return File.Exists("datenbank.db");
     }
 
-    static void RunDatabase() 
+    static void RunDatabase() //made by Kumpitsch
     {
+
         DatabaseCreator.CreateDatabase();
         DataBaseInserter.InsertToDatabase();
     }
 }
 
 
-public static class DatabaseCreator //Kumpitsch
+public static class DatabaseCreator //made by Kumpitsch
 {
-    public  static void CreateDatabase()
+    public static void CreateDatabase()
     {
         string connectionString = "Data Source=datenbank.db";
         string sqlFilePath = "sourceDatabank.sql";
@@ -488,12 +716,12 @@ public static class DatabaseCreator //Kumpitsch
         }
         catch (Exception ex)
         {
-
+            Console.WriteLine(ex.Message);
         }
     }
 }
 
-public static class DataBaseInserter //Kumpitsch
+public static class DataBaseInserter //made by Kumpitsch
 {
     public static void InsertToDatabase()
     {

@@ -50,7 +50,8 @@
             "Microsoft.Data.Sqlite": "10.0.0",
             "Microsoft.NET.Test.Sdk": "17.11.1",
             "MSTest.TestAdapter": "3.5.2",
-            "MSTest.TestFramework": "3.5.2"
+            "MSTest.TestFramework": "3.5.2",
+            "QuestPDF": "2025.12.1"
           },
           "imports": [
             "net461",
@@ -139,7 +140,8 @@
             "Microsoft.Data.Sqlite": "10.0.0",
             "Microsoft.NET.Test.Sdk": "17.11.1",
             "MSTest.TestAdapter": "3.5.2",
-            "MSTest.TestFramework": "3.5.2"
+            "MSTest.TestFramework": "3.5.2",
+            "QuestPDF": "2025.12.1"
           },
           "imports": [
             "net461",
