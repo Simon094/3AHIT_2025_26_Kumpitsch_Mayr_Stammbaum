@@ -12,3 +12,16 @@ VALUES
 ('Markus Hinteregger', 2010, NULL, 0, 1),
 ('Lisa Hinteregger', 2012, NULL, 0, 0);
 
+INSERT OR IGNORE INTO ParentChild
+(ChildId, ParentId)
+VALUES
+(3, 1),
+(3, 2),
+(5, 3),
+(5, 4),
+(7, 5),
+(7, 6),
+(9, 7),
+(9, 8),
+(10, 7),
+(10, 8);
