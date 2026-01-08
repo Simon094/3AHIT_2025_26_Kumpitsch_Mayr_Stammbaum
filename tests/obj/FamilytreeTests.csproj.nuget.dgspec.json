@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\simon\\Desktop\\ITP2 Code\\3AHIT_2025_26_Kumpitsch_Mayr_Stammbaum\\tests\\FamilytreeTests.csproj": {}
+    "c:\\Users\\simon\\Desktop\\ITP2 Code\\3AHIT_2025_26_Kumpitsch_Mayr_Stammbaum\\tests\\FamilytreeTests.csproj": {}
   },
   "projects": {
-    "C:\\Users\\simon\\Desktop\\ITP2 Code\\3AHIT_2025_26_Kumpitsch_Mayr_Stammbaum\\src\\FamilytreesLib.csproj": {
+    "c:\\Users\\simon\\Desktop\\ITP2 Code\\3AHIT_2025_26_Kumpitsch_Mayr_Stammbaum\\src\\FamilytreesLib.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\simon\\Desktop\\ITP2 Code\\3AHIT_2025_26_Kumpitsch_Mayr_Stammbaum\\src\\FamilytreesLib.csproj",
+        "projectUniqueName": "c:\\Users\\simon\\Desktop\\ITP2 Code\\3AHIT_2025_26_Kumpitsch_Mayr_Stammbaum\\src\\FamilytreesLib.csproj",
         "projectName": "FamilytreesLib",
-        "projectPath": "C:\\Users\\simon\\Desktop\\ITP2 Code\\3AHIT_2025_26_Kumpitsch_Mayr_Stammbaum\\src\\FamilytreesLib.csproj",
+        "projectPath": "c:\\Users\\simon\\Desktop\\ITP2 Code\\3AHIT_2025_26_Kumpitsch_Mayr_Stammbaum\\src\\FamilytreesLib.csproj",
         "packagesPath": "C:\\Users\\simon\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\simon\\Desktop\\ITP2 Code\\3AHIT_2025_26_Kumpitsch_Mayr_Stammbaum\\src\\obj\\",
+        "outputPath": "c:\\Users\\simon\\Desktop\\ITP2 Code\\3AHIT_2025_26_Kumpitsch_Mayr_Stammbaum\\src\\obj\\",
         "projectStyle": "PackageReference",
         "centralPackageVersionsManagementEnabled": true,
         "configFilePaths": [
@@ -73,14 +73,14 @@
         }
       }
     },
-    "C:\\Users\\simon\\Desktop\\ITP2 Code\\3AHIT_2025_26_Kumpitsch_Mayr_Stammbaum\\tests\\FamilytreeTests.csproj": {
+    "c:\\Users\\simon\\Desktop\\ITP2 Code\\3AHIT_2025_26_Kumpitsch_Mayr_Stammbaum\\tests\\FamilytreeTests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\simon\\Desktop\\ITP2 Code\\3AHIT_2025_26_Kumpitsch_Mayr_Stammbaum\\tests\\FamilytreeTests.csproj",
+        "projectUniqueName": "c:\\Users\\simon\\Desktop\\ITP2 Code\\3AHIT_2025_26_Kumpitsch_Mayr_Stammbaum\\tests\\FamilytreeTests.csproj",
         "projectName": "FamilytreeTests",
-        "projectPath": "C:\\Users\\simon\\Desktop\\ITP2 Code\\3AHIT_2025_26_Kumpitsch_Mayr_Stammbaum\\tests\\FamilytreeTests.csproj",
+        "projectPath": "c:\\Users\\simon\\Desktop\\ITP2 Code\\3AHIT_2025_26_Kumpitsch_Mayr_Stammbaum\\tests\\FamilytreeTests.csproj",
         "packagesPath": "C:\\Users\\simon\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\simon\\Desktop\\ITP2 Code\\3AHIT_2025_26_Kumpitsch_Mayr_Stammbaum\\tests\\obj\\",
+        "outputPath": "c:\\Users\\simon\\Desktop\\ITP2 Code\\3AHIT_2025_26_Kumpitsch_Mayr_Stammbaum\\tests\\obj\\",
         "projectStyle": "PackageReference",
         "centralPackageVersionsManagementEnabled": true,
         "configFilePaths": [
@@ -96,8 +96,8 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "C:\\Users\\simon\\Desktop\\ITP2 Code\\3AHIT_2025_26_Kumpitsch_Mayr_Stammbaum\\src\\FamilytreesLib.csproj": {
-                "projectPath": "C:\\Users\\simon\\Desktop\\ITP2 Code\\3AHIT_2025_26_Kumpitsch_Mayr_Stammbaum\\src\\FamilytreesLib.csproj"
+              "c:\\Users\\simon\\Desktop\\ITP2 Code\\3AHIT_2025_26_Kumpitsch_Mayr_Stammbaum\\src\\FamilytreesLib.csproj": {
+                "projectPath": "c:\\Users\\simon\\Desktop\\ITP2 Code\\3AHIT_2025_26_Kumpitsch_Mayr_Stammbaum\\src\\FamilytreesLib.csproj"
               }
             }
           }

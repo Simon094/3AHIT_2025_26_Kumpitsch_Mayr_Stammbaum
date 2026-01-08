@@ -37,7 +37,10 @@ public class Person // 50/50 von Beiden geschrieben und kommentiert
     /// "_personID" is a integer for assigning a ID to a person wich is the primary key for the databank (automatic assignment)
     /// </summary>
     private int _personID;
-
+    /// <summary>
+    /// "_spouseName" is for the person that the person is married to
+    /// </summary>
+    private string? _spouseName;
     /// <summary>
     /// "PersonID" is a getter setter property to set the ID of a person to a specific ID
     /// </summary>
@@ -55,7 +58,7 @@ public class Person // 50/50 von Beiden geschrieben und kommentiert
     /// <param name="deathyear"> The deathyear of the person </param>
     /// <param name="isMale"> Checks if the person is male or not </param>
     /// <param name="personID"></param>
-    public Person(string name, int? birthyear, bool married, int? deathyear, bool isMale, int personID)
+    public Person(string name, int? birthyear, bool married, int? deathyear, bool isMale, string? spouse, int personID)
     {
         _name = name;
         _birthyear = birthyear;
@@ -63,6 +66,7 @@ public class Person // 50/50 von Beiden geschrieben und kommentiert
         DateTime today = DateTime.Today;
         _deathyear = deathyear;
         _isMale = isMale;
+        _spouseName = spouse;
         _personID = personID;
         if (this.IsAdult() == true)
         {
@@ -72,6 +76,15 @@ public class Person // 50/50 von Beiden geschrieben und kommentiert
         {
             _child = true;
         }
+    }
+
+    /// <summary>
+    /// "Spouse" is for getting and setting the name of the spouse
+    /// </summary>
+    public string? Spouse
+    {
+        get => _spouseName;
+        set => _spouseName = value;
     }
 
     /// <summary>
@@ -251,6 +264,16 @@ public class Person // 50/50 von Beiden geschrieben und kommentiert
         {
             ageAlive = $"ist {this.Age()} Jahre alt geworden";
         }
-        return $"{_name} {aliveOrNot} {gender} und {ageAlive}";
+
+        string spouse;
+
+        if(_spouseName == null)
+        {
+            spouse = $"{aliveOrNot} mit {_spouseName} verheiratet";
+        } else
+        {
+            spouse = $"{aliveOrNot} nicht verheiratet";
+        }
+        return $"{_name} {aliveOrNot} {gender}, {spouse} und {ageAlive}";
     }
 }

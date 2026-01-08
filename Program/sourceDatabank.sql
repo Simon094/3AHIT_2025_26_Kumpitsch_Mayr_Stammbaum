@@ -3,7 +3,17 @@ CREATE TABLE IF NOT EXISTS Person (
     Name TEXT NOT NULL,
     Birthyear TEXT NULL,
     Deathyear TEXT NULL,
-    IsMarried INTEGER NOT NULL,
-    IsMale INTEGER NOT NULL,
+    IsMarried BOOLEAN NOT NULL,
+    IsMale BOOLEAN NOT NULL,
+    SpouseId INTEGER,
+    FOREIGN KEY (SpouseId) REFERENCES Person(Id),
     UNIQUE (Name, IsMarried, IsMale)
+);
+
+CREATE TABLE IF NOT EXISTS ParentAndChild (
+    ChildId INTEGER NOT NULL,
+    ParentId INTEGER NOT NULL,
+    PRIMARY KEY (ChildId, ParentId),
+    FOREIGN KEY (ChildId) REFERENCES Person(Id),
+    FOREIGN KEY (ParentId) REFERENCES Person(Id)
 );

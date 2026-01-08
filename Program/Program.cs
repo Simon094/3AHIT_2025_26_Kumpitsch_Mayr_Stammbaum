@@ -37,7 +37,7 @@ class Program //Fast alle made by Mayr
         int choicesecond = CheckWrongChoiceInputForMainMenu(choicefirst, 4, 1);
         if (choicesecond == 1)
         {
-            DisplayFamilyTreeInfos();
+            DisplayFamilyTreeInfos(); //bearbeitet
         }
         else if (choicesecond == 2)
         {
@@ -77,7 +77,14 @@ class Program //Fast alle made by Mayr
             Console.WriteLine($"Name: {p.Name}");
             Console.WriteLine($"Geburtsjahr: {p.Birthyear}");
             Console.WriteLine($"Sterbejahr: {deathYear}");
-            Console.WriteLine($"Verheiratet: {married}");
+            if (married == "Ja")
+            {
+                Console.WriteLine($"Verheiratet: {married} zu {p.Spouse}");
+            }
+            else
+            {
+                Console.WriteLine($"Verheiratet: {married}");
+            }
             Console.WriteLine($"Geschlecht: {gender}");
             Console.WriteLine("-------------------------------------------------");
         }
@@ -109,8 +116,9 @@ class Program //Fast alle made by Mayr
         Console.WriteLine("Drücke '1' um eine Person zu löschen");
         Console.WriteLine("Drücke '2' um eine Person hinzuzufügen");
         Console.WriteLine("Drücke '3' um zum Hauptmenu zurückzukehren");
+        Console.WriteLine("Drücke '4' um zum Hauptmenu zurückzukehren");
         int choice = Convert.ToInt32(Console.ReadLine());
-        int choice2 = CheckWrongChoiceInputForMainMenu(choice, 3, 1);
+        int choice2 = CheckWrongChoiceInputForMainMenu(choice, 4, 1);
 
         if (choice2 == 1)
         {
@@ -122,8 +130,134 @@ class Program //Fast alle made by Mayr
         }
         else if (choice2 == 3)
         {
+            EditPerson();
+        }
+        else if (choice2 == 4)
+        {
             HauptMenu();
         }
+    }
+
+    static bool CheckStringEmptyOrSpace(string checking)
+    {
+        if (string.IsNullOrWhiteSpace(checking))
+        {
+            return false;
+        }
+        else if (string.IsNullOrEmpty(checking))
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+
+    static void UpdatePersonField(
+    SqliteConnection connection,
+    string name,
+    string field,
+    object value)
+    {
+        var cmd = connection.CreateCommand();
+        cmd.CommandText = $@"
+        UPDATE Person
+        SET {field} = $value
+        WHERE Name = $name;
+    ";
+
+        cmd.Parameters.AddWithValue("$value", value ?? DBNull.Value);
+        cmd.Parameters.AddWithValue("$name", name);
+
+        cmd.ExecuteNonQuery();
+    }
+
+
+    static void EditPerson()
+    {
+        Console.WriteLine("---------------------------");
+        Console.WriteLine("Person bearbeitem");
+        Console.WriteLine("---------------------------");
+        Console.WriteLine("Wie heißt die Person die sie bearbeiten wollen?");
+        using var connection = new SqliteConnection(connectionString);
+        connection.Open();
+        bool boolean = false;
+        bool exists = false;
+        int i = 0;
+        string nameOfPersonThatIsBeeingChanged = "";
+        while (boolean == false || exists == false)
+        {
+            nameOfPersonThatIsBeeingChanged = Convert.ToString(Console.ReadLine());
+            boolean = CheckStringEmptyOrSpace(nameOfPersonThatIsBeeingChanged);
+            exists = PersonExistiertInDb(connection, nameOfPersonThatIsBeeingChanged);
+            if (boolean == false)
+            {
+                Console.WriteLine("Zeile darf nicht leer sein!");
+            }
+            if (exists == false)
+            {
+                Console.WriteLine("Person existiert nicht");
+            }
+            i++;
+            if (i > 2)
+            {
+                Console.WriteLine("Tippe 'exit' um ins Hauptmenü zurückzukehren");
+            }
+            if (i > 2 && nameOfPersonThatIsBeeingChanged.ToLower() == "exit")
+            {
+                HauptMenu();
+                return;
+            }
+
+            Console.WriteLine("---------------------------");
+            Console.WriteLine($"Was möchtest du bei {nameOfPersonThatIsBeeingChanged} ändern?");
+            Console.WriteLine("1 - Name");
+            Console.WriteLine("2 - Geburtsjahr");
+            Console.WriteLine("3 - Sterbejahr");
+            Console.WriteLine("4 - Ehestatus");
+            Console.WriteLine("6 - Geschlecht");
+            Console.WriteLine("7 - Abbrechen");
+            int choice = Convert.ToInt32(Console.ReadLine());
+            int choice2 = CheckWrongChoiceInputForMainMenu(choice, 6, 1);
+
+            switch (choice2)
+            {
+                case 1:
+                    Console.WriteLine("Was wollen Sie als neuen Namen?");
+                    string newName = Console.ReadLine();
+                    UpdatePersonField(connection, nameOfPersonThatIsBeeingChanged, "Name", newName);
+                    break;
+
+                case 2:
+                    Console.WriteLine("Was wollen Sie als neues Geburtsjahr?");
+                    int? newBirthYear = Convert.ToInt32(Console.ReadLine());
+                    UpdatePersonField(connection, nameOfPersonThatIsBeeingChanged, "Birthyear", newBirthYear);
+                    break;
+
+                case 3:
+                    int? newDeath = MakeNewPersonIsAliveMaker(nameOfPersonThatIsBeeingChanged, null);
+                    UpdatePersonField(connection, nameOfPersonThatIsBeeingChanged, "Deathyear", newDeath);
+                    break;
+
+                case 4:
+                    bool married = MakeNewPersonMarriedMaker(nameOfPersonThatIsBeeingChanged);
+                    UpdatePersonField(connection, nameOfPersonThatIsBeeingChanged, "IsMarried", married);
+                    break;
+
+                case 5:
+                    bool isMale = MakeNewPersonIsMaleMaker(nameOfPersonThatIsBeeingChanged);
+                    UpdatePersonField(connection, nameOfPersonThatIsBeeingChanged, "IsMale", isMale);
+                    break;
+                case 6:
+                    HauptMenu();
+                    return;
+            }
+        }
+
+
+
     }
 
     static string MakeNewPersonNameMaker() //made by Mayr
@@ -528,8 +662,58 @@ class Program //Fast alle made by Mayr
     {
         ExportiereDbAlsPdfQuestPdf();
         HauptMenu();
+
     }
 
+
+    static void SetSpouse(string name1, string name2) //made by Mayr
+    {
+        using var connection = new SqliteConnection(connectionString);
+        connection.Open();
+
+        int id1 = GetPersonIdByName(connection, name1);
+        int id2 = GetPersonIdByName(connection, name2);
+
+        if (id1 == -1 || id2 == -1)
+        {
+            Console.WriteLine("Eine oder beide Personen existieren nicht.");
+            return;
+        }
+
+        using var transaction = connection.BeginTransaction();
+        try
+        {
+            var cmd = connection.CreateCommand();
+            cmd.Transaction = transaction;
+            cmd.CommandText = @"
+            UPDATE Person SET SpouseId = @id2, IsMarried = 1 WHERE Id = @id1;
+            UPDATE Person SET SpouseId = @id1, IsMarried = 1 WHERE Id = @id2;";
+
+            cmd.Parameters.AddWithValue("@id1", id1);
+            cmd.Parameters.AddWithValue("@id2", id2);
+
+            cmd.ExecuteNonQuery();
+            transaction.Commit();
+
+            Console.WriteLine($"{name1} und {name2} sind jetzt verheiratet.");
+        }
+        catch (Exception ex)
+        {
+            transaction.Rollback();
+            Console.WriteLine("Fehler beim Heiraten: " + ex.Message);
+        }
+    }
+
+    static int GetPersonIdByName(SqliteConnection connection, string name) //made by Mayr
+    {
+        var cmd = connection.CreateCommand();
+        cmd.CommandText = "SELECT Id FROM Person WHERE Name = @name";
+        cmd.Parameters.AddWithValue("@name", name);
+
+        var result = cmd.ExecuteScalar();
+
+        return result != null ? Convert.ToInt32(result) : -1;
+    }
     static List<Person> LadeAllePersonenAusDb() //made by Mayr
     {
         var personen = new List<Person>();
@@ -553,7 +737,7 @@ class Program //Fast alle made by Mayr
             bool isMale = reader.GetBoolean(5);
             int id = reader.GetInt32(0);
 
-            var person = new Person(name, birthyear, married, deathyear, isMale, id);
+            var person = new Person(name, birthyear, married, deathyear, isMale, null, id);
             personen.Add(person);
         }
 
@@ -645,15 +829,21 @@ class Program //Fast alle made by Mayr
                             header.Cell().Text("Sterbejahr").SemiBold();
                             header.Cell().Text("Verheiratet").SemiBold();
                             header.Cell().Text("Geschlecht").SemiBold();
+                            header.Cell().Text("Eltern").SemiBold();
                         });
 
                         foreach (var p in personen)
                         {
+                            var parents = GetParentsOfChild(p.PersonID);
+                            var parentText = parents.Count > 0
+                                ? string.Join(" & ", parents)
+                                : "-";
                             table.Cell().Text(p.Name);
                             table.Cell().Text(p.Birthyear?.ToString() ?? "-");
                             table.Cell().Text(p.Deathyear?.ToString() ?? "-");
                             table.Cell().Text(p.Married ? "Ja" : "Nein");
                             table.Cell().Text(p.IsMale ? "Männlich" : "Weiblich");
+                            table.Cell().Text(parentText);
                         }
                     });
 
@@ -687,6 +877,48 @@ class Program //Fast alle made by Mayr
         DatabaseCreator.CreateDatabase();
         DataBaseInserter.InsertToDatabase();
     }
+
+    static void AddParentToChild(SqliteConnection connection, int parentId, int childId)
+    {
+        var cmd = connection.CreateCommand();
+        cmd.CommandText = @"
+        INSERT INTO ParentChild (ChildId, ParentId)
+        VALUES ($childId, $parentId);
+    ";
+
+        cmd.Parameters.AddWithValue("$childId", childId);
+        cmd.Parameters.AddWithValue("$parentId", parentId);
+
+        cmd.ExecuteNonQuery();
+    }
+
+    static List<string> GetParentsOfChild(int childId)
+    {
+        var parents = new List<string>();
+
+        using var connection = new SqliteConnection(connectionString);
+        connection.Open();
+
+        var cmd = connection.CreateCommand();
+        cmd.CommandText = @"
+        SELECT p.Name
+        FROM ParentChild pc
+        JOIN Person p ON p.Id = pc.ParentId
+        WHERE pc.ChildId = $childId;
+    ";
+
+        cmd.Parameters.AddWithValue("$childId", childId);
+
+        using var reader = cmd.ExecuteReader();
+        while (reader.Read())
+        {
+            parents.Add(reader.GetString(0));
+        }
+
+        return parents;
+    }
+
+
 }
 
 
@@ -746,4 +978,5 @@ public static class DataBaseInserter //made by Kumpitsch
         }
 
     }
+
 }
