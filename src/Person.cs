@@ -37,7 +37,6 @@ public class Person // 50/50 von Beiden geschrieben und kommentiert
     /// "_personID" is a integer for assigning a ID to a person wich is the primary key for the databank (automatic assignment)
     /// </summary>
     private int _personID;
-
     /// <summary>
     /// "PersonID" is a getter setter property to set the ID of a person to a specific ID
     /// </summary>
@@ -251,6 +250,7 @@ public class Person // 50/50 von Beiden geschrieben und kommentiert
         {
             ageAlive = $"ist {this.Age()} Jahre alt geworden";
         }
-        return $"{_name} {aliveOrNot} {gender} und {ageAlive}";
+
+        return $"{_name} {aliveOrNot} {gender}und {ageAlive}";
     }
 }
